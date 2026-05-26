@@ -5,7 +5,7 @@ services:
     ports:
       - "${NGINX_PORT:-80}:80"
     volumes:
-      - ./nginx/nginx.conf:/etc/nginx/templates/default.conf.template:ro
+      - ./nginx.conf:/etc/nginx/templates/default.conf.template:ro
     environment:
       - HUB_PORT=${PORT:-3002}
     depends_on:
