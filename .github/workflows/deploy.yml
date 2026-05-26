@@ -57,6 +57,10 @@ jobs:
         run: |
           scp -o StrictHostKeyChecking=no -P ${{ vars.SSH_PORT }} docker-compose.yml ${{ vars.SSH_USER }}@${{ vars.SSH_HOST }}:/var/www/vhosts/totalrenting.dev/hub-service/docker-compose.yml
 
+      - name: Copy nginx config to server
+        run: |
+          scp -o StrictHostKeyChecking=no -P ${{ vars.SSH_PORT }} -r nginx ${{ vars.SSH_USER }}@${{ vars.SSH_HOST }}:/var/www/vhosts/totalrenting.dev/hub-service/
+
       - name: Write .env on server
         run: |
           ssh -o StrictHostKeyChecking=no -p ${{ vars.SSH_PORT }} ${{ vars.SSH_USER }}@${{ vars.SSH_HOST }} "cat > /var/www/vhosts/totalrenting.dev/hub-service/.env" << 'EOF'
