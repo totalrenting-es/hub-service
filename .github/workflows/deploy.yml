@@ -55,11 +55,11 @@ jobs:
 
       - name: Copy docker-compose.yml to server
         run: |
-          cat docker-compose.yml | ssh -o StrictHostKeyChecking=no -p ${{ vars.SSH_PORT }} ${{ vars.SSH_USER }}@${{ vars.SSH_HOST }} "cat > /var/www/vhosts/totalrenting.dev/hub-service/docker-compose.yml"
+          cat docker-compose.yml | ssh -o StrictHostKeyChecking=no -p ${{ vars.SSH_PORT }} ${{ vars.SSH_USER }}@${{ vars.SSH_HOST }} "rm -f /var/www/vhosts/totalrenting.dev/hub-service/docker-compose.yml && cat > /var/www/vhosts/totalrenting.dev/hub-service/docker-compose.yml"
 
       - name: Copy nginx config to server
         run: |
-          cat nginx/nginx.conf | ssh -o StrictHostKeyChecking=no -p ${{ vars.SSH_PORT }} ${{ vars.SSH_USER }}@${{ vars.SSH_HOST }} "cat > /var/www/vhosts/totalrenting.dev/hub-service/nginx/nginx.conf"
+          cat nginx/nginx.conf | ssh -o StrictHostKeyChecking=no -p ${{ vars.SSH_PORT }} ${{ vars.SSH_USER }}@${{ vars.SSH_HOST }} "rm -f /var/www/vhosts/totalrenting.dev/hub-service/nginx/nginx.conf && cat > /var/www/vhosts/totalrenting.dev/hub-service/nginx/nginx.conf"
 
       - name: Write .env on server
         run: |
