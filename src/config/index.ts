@@ -45,7 +45,7 @@ export class Config {
 
   private parseDestinations(envValue: string): string[] {
     return envValue
-      .split(',')
+      .split(/[\n,]/)
       .map((url) => url.trim())
       .filter(Boolean);
   }

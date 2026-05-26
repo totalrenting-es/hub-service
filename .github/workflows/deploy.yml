@@ -2,12 +2,43 @@ name: Deploy to Production
 
 on:
   push:
-    branches:
-      - master
+    tags:
+      - "v*"
+  workflow_dispatch:
 
 jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Log in to GHCR
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build and push image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          push: true
+          tags: ghcr.io/${{ github.repository }}:${{ github.ref_name }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
   deploy:
     runs-on: ubuntu-latest
+    needs: build
 
     steps:
       - name: Checkout code
@@ -18,14 +49,58 @@ jobs:
         with:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
 
+      - name: Create deploy directory on server
+        run: |
+          ssh -o StrictHostKeyChecking=no -p ${{ vars.SSH_PORT }} ${{ vars.SSH_USER }}@${{ vars.SSH_HOST }} "mkdir -p /var/www/vhosts/totalrenting.dev/hub-service"
+
+      - name: Copy docker-compose.yml to server
+        run: |
+          scp -o StrictHostKeyChecking=no -P ${{ vars.SSH_PORT }} docker-compose.yml ${{ vars.SSH_USER }}@${{ vars.SSH_HOST }}:/var/www/vhosts/totalrenting.dev/hub-service/docker-compose.yml
+
+      - name: Write .env on server
+        run: |
+          ssh -o StrictHostKeyChecking=no -p ${{ vars.SSH_PORT }} ${{ vars.SSH_USER }}@${{ vars.SSH_HOST }} "cat > /var/www/vhosts/totalrenting.dev/hub-service/.env" << 'EOF'
+          NODE_ENV=production
+          PORT=${{ vars.PORT }}
+          HOST=${{ vars.HOST }}
+          NGINX_PORT=${{ vars.NGINX_PORT }}
+          API_PREFIX=${{ vars.API_PREFIX }}
+          ALPHABET_API_URL=${{ vars.ALPHABET_API_URL }}
+          VIXIEES_TOTALRENTING_DESTINATIONS="${{ vars.VIXIEES_TOTALRENTING_DESTINATIONS }}"
+          VIXIEES_TWIPO_DESTINATIONS="${{ vars.VIXIEES_TWIPO_DESTINATIONS }}"
+          EOF
+
       - name: Deploy to server
         run: |
-          ssh -o StrictHostKeyChecking=no -p ${{vars.SSH_PORT}} ${{vars.SSH_USER}}@${{vars.SSH_HOST}} << 'EOF'
-            eval $(ssh-agent)
-            ssh-add ~/.ssh/github_actions
-            cd /opt/apps/hub-totalrenting/
-            git checkout master
-            git pull origin master
-            docker compose down
-            docker compose up -d --build
+          ssh -o StrictHostKeyChecking=no -p ${{vars.SSH_PORT}} ${{vars.SSH_USER}}@${{vars.SSH_HOST}} << EOF
+            VERSION=${{ github.ref_name }}
+            IMAGE=ghcr.io/${{ github.repository }}:${{ github.ref_name }}
+
+            echo "Pulling image \$IMAGE..."
+            echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+            docker pull \$IMAGE
+            docker tag \$IMAGE totalrenting/hub-service:\$VERSION
+            docker tag \$IMAGE totalrenting/hub-service:latest
+
+            cd /var/www/vhosts/totalrenting.dev/hub-service/
+            docker compose up -d --no-deps --no-build hub-1 hub-2 hub-3
+
+            for container in node-hub-service-1 node-hub-service-2 node-hub-service-3; do
+              healthy=0
+              for attempt in \$(seq 1 24); do
+                status=\$(docker inspect --format='{{.State.Health.Status}}' \$container 2>/dev/null || echo "missing")
+                echo "  [\$attempt/24] \$container: \$status"
+                if [ "\$status" = "healthy" ]; then
+                  healthy=1
+                  break
+                fi
+                sleep 5
+              done
+              if [ \$healthy -eq 0 ]; then
+                echo "ERROR: \$container did not become healthy. Aborting."
+                exit 1
+              fi
+            done
+
+            echo "Deploy \$VERSION completed successfully."
           EOF

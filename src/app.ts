@@ -38,7 +38,28 @@ export const buildApp = async () => {
 
   // Scalar UI
   await fastify.register(scalarPlugin, {
-    routePrefix: '/docs'
+    routePrefix: '/docs',
+    configuration: {
+      layout: 'classic',
+      defaultOpenAllTags: true,
+      hideDarkModeToggle: false,
+      theme: 'default',
+      hideClientButton: false,
+      showSidebar: true,
+      operationTitleSource: 'summary',
+      persistAuth: false,
+      isEditable: false,
+      hideModels: false,
+      documentDownloadType: 'both',
+      hideTestRequestButton: false,
+      hideSearch: false,
+      showOperationId: false,
+      withDefaultFonts: true,
+      expandAllModelSections: false,
+      expandAllResponses: false,
+      orderSchemaPropertiesBy: 'alpha',
+      orderRequiredPropertiesFirst: true
+    }
   });
 
   // Health check
