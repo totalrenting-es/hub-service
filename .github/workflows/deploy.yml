@@ -83,7 +83,7 @@ jobs:
             docker tag \$IMAGE totalrenting/hub-service:latest
 
             cd /var/www/vhosts/totalrenting.dev/hub-service/
-            docker compose up -d --no-deps --no-build hub-1 hub-2 hub-3
+            docker compose up -d --no-deps --no-build nginx hub-1 hub-2 hub-3
 
             for container in node-hub-service-1 node-hub-service-2 node-hub-service-3; do
               healthy=0
