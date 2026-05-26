@@ -57,9 +57,13 @@ jobs:
         run: |
           cat docker-compose.yml | ssh -o StrictHostKeyChecking=no -p ${{ vars.SSH_PORT }} ${{ vars.SSH_USER }}@${{ vars.SSH_HOST }} "tee /var/www/vhosts/totalrenting.dev/hub-service/docker-compose.yml > /dev/null"
 
+      - name: Create nginx directory on server
+        run: |
+          ssh -o StrictHostKeyChecking=no -p ${{ vars.SSH_PORT }} ${{ vars.SSH_USER }}@${{ vars.SSH_HOST }} "mkdir -p /var/www/vhosts/totalrenting.dev/hub-service/nginx"
+
       - name: Write nginx.conf on server
         run: |
-          cat nginx/nginx.conf | ssh -o StrictHostKeyChecking=no -p ${{ vars.SSH_PORT }} ${{ vars.SSH_USER }}@${{ vars.SSH_HOST }} "tee /var/www/vhosts/totalrenting.dev/hub-service/nginx.conf > /dev/null"
+          cat nginx/nginx.conf | ssh -o StrictHostKeyChecking=no -p ${{ vars.SSH_PORT }} ${{ vars.SSH_USER }}@${{ vars.SSH_HOST }} "tee /var/www/vhosts/totalrenting.dev/hub-service/nginx/nginx.conf > /dev/null"
 
       - name: Write .env on server
         run: |

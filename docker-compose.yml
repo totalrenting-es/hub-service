@@ -16,7 +16,7 @@ services:
       hub-3:
         condition: service_healthy
     restart: always
-    command: /bin/sh -c "envsubst '$$HUB_PORT' < /etc/nginx/templates/default.conf.template > /etc/nginx/nginx.conf && nginx -g 'daemon off;'"
+    command: /bin/sh -c "envsubst '$${HUB_PORT}' < /etc/nginx/templates/default.conf.template > /etc/nginx/nginx.conf && nginx -t && nginx -g 'daemon off;'"
     deploy:
       resources:
         limits:
