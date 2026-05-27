@@ -24,7 +24,6 @@ services:
           memory: 512M
     networks:
       - hub-network
-      - api-network
 
   hub-1:
     image: totalrenting/hub-service:latest
@@ -59,7 +58,7 @@ services:
           memory: 256M
     networks:
       - hub-network
-      - api-network
+      - core-network
 
   hub-2:
     image: totalrenting/hub-service:latest
@@ -94,7 +93,7 @@ services:
           memory: 256M
     networks:
       - hub-network
-      - api-network
+      - core-network
 
   hub-3:
     image: totalrenting/hub-service:latest
@@ -129,11 +128,11 @@ services:
           memory: 256M
     networks:
       - hub-network
-      - api-network
+      - core-network
 
 networks:
   hub-network:
     driver: bridge
-  api-network:
+  core-network:
     external: true
-    name: api-totalrenting-network
+    name: core-network
