@@ -32,7 +32,18 @@ export const buildApp = async () => {
         { name: 'Vixiees', description: 'Webhooks de Vixiees (fan-out a múltiples destinos)' },
         { name: 'Settings', description: 'Configuración y utilidades globales' },
         { name: 'Health', description: 'Estado del servidor' }
-      ]
+      ],
+      components: {
+        securitySchemes: {
+          bearerAuth: {
+            type: 'http',
+            scheme: 'bearer',
+            bearerFormat: 'JWT',
+            description: 'Token de acceso de Alphabet. Obtén uno llamando a GET /api/alphabet/token'
+          }
+        }
+      },
+      security: [{ bearerAuth: [] }]
     }
   });
 

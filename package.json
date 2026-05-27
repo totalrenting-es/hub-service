@@ -4,10 +4,10 @@
   "description": "Hub central de integraciones: proxy Alphabet, webhooks Vixiees y automatizaciones",
   "main": "index.js",
   "scripts": {
-    "dev": "tsx watch src/server.ts",
-    "start": "tsx src/server.ts",
-    "build": "tsc",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "tsx watch --env-file=.env.dev src/server.ts",
+    "prod": "tsx --env-file=.env src/server.ts",
+    "build": "tsc && tsc-alias",
+    "format": "prettier --write src/"
   },
   "keywords": [],
   "author": "",

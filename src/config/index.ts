@@ -8,6 +8,10 @@ export class Config {
   // Alphabet
   public alphabet: {
     apiUrl: string;
+    tokenUrl: string;
+    clientId: string;
+    clientSecret: string;
+    grantType: string;
   };
 
   // Vixiees Webhook Destinations
@@ -29,7 +33,11 @@ export class Config {
 
     // Alphabet
     this.alphabet = {
-      apiUrl: process.env.ALPHABET_API_URL || ''
+      apiUrl: process.env.ALPHABET_API_URL || '',
+      tokenUrl: process.env.ALPHABET_TOKEN_URL || '',
+      clientId: process.env.ALPHABET_CLIENT_ID || '',
+      clientSecret: process.env.ALPHABET_CLIENT_SECRET || '',
+      grantType: process.env.ALPHABET_GRANT_TYPE || 'client_credentials'
     };
 
     // Vixiees Webhook Destinations (comma-separated URLs)
