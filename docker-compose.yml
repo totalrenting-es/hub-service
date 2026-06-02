@@ -24,6 +24,7 @@ services:
           memory: 512M
     networks:
       - hub-network
+      - core-network
 
   hub-1:
     image: totalrenting/hub-service:latest
