@@ -21,7 +21,7 @@ async function forwardToDestination(url: string, body: Record<string, unknown>):
 
 function shouldForwardToDestination(url: string, body: Record<string, unknown>): boolean {
   // n8n only receives whatsapp_received events from phone 34621677469
-  if (url.includes('n8n.srv1276600.hstgr.cloud')) {
+  if (url.includes('n8n.srv1276600.hstgr.cloud') || url.includes('n8n.secondrenting.com')) {
     const { event, payload } = body as { event?: string; payload?: any };
     return event === 'whatsapp_received' && payload?.message?.value?.metadata?.display_phone_number === '34621677469';
   }
