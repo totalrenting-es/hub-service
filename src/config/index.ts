@@ -24,6 +24,14 @@ export class Config {
     };
   };
 
+  // Integrations-service (interno, core-network): destino al que el hub reenvía
+  // el webhook de HubSpot para que cree el lead en Avanti.
+  public integrations: {
+    url: string;
+    leadWebhookPath: string;
+  };
+
+
   constructor() {
     // Server
     this.nodeEnv = process.env.NODE_ENV || 'development';
@@ -49,6 +57,13 @@ export class Config {
         destinations: this.parseDestinations(process.env.VIXIEES_TWIPO_DESTINATIONS || '')
       }
     };
+
+    // Integrations-service (interno)
+    this.integrations = {
+      url: process.env.INTEGRATIONS_SERVICE_URL || 'http://integrations-service:3004',
+      leadWebhookPath: '/api/hubspot/webhooks/lead-perdido-avanti'
+    };
+
   }
 
   private parseDestinations(envValue: string): string[] {
