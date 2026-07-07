@@ -1,0 +1,440 @@
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+  background: #ffffff;
+  color: #1c1e21;
+}
+
+/* En dark, el body debe ser oscuro: el header es translúcido y, si el body fuese
+   blanco, el blur lo mezclaría a gris. Cubrimos que Scalar ponga .dark-mode en <html>
+   (.dark-mode body) o en el propio <body> (body.dark-mode). */
+.dark-mode body,
+body.dark-mode {
+  background: #0f0f0f;
+  color: #e8e8e8;
+}
+
+/* Login: mismo aire que la doc de Scalar en claro (fondo neutro, tarjeta con sombra suave) */
+body.login-view {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fbfbfb;
+  color: #1c1e21;
+}
+
+.login-card {
+  background: #ffffff;
+  border: 1px solid #ededed;
+  border-radius: 14px;
+  padding: 40px;
+  width: 100%;
+  max-width: 400px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04), 0 8px 28px rgba(0, 0, 0, 0.06);
+}
+
+/* Logo corporativo anclado a la esquina superior izquierda (estilo del mockup) */
+.login-logo {
+  position: fixed;
+  top: 24px;
+  left: 32px;
+  display: flex;
+  align-items: center;
+}
+
+.login-logo-sub { display: none; }
+
+/* Icono de candado dentro de la tarjeta */
+.login-lock {
+  width: 48px;
+  height: 48px;
+  margin: 0 auto 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f4f4f5;
+  border-radius: 12px;
+  color: #1c1e21;
+}
+
+.login-card h1 { font-size: 24px; font-weight: 700; color: #111827; margin-bottom: 8px; text-align: center; }
+
+.login-subtitle { font-size: 14px; color: #6b7280; margin-bottom: 24px; text-align: center; }
+
+/* Separador con etiqueta central */
+.login-divider {
+  position: relative;
+  text-align: center;
+  margin: 22px 0 14px;
+}
+.login-divider::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: #ededed;
+}
+.login-divider span {
+  position: relative;
+  background: #ffffff;
+  padding: 0 12px;
+  font-size: 12px;
+  color: #9ca3af;
+}
+
+.login-help {
+  font-size: 13px;
+  color: #9ca3af;
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+/* Footer fijo al pie, solo en la vista de login */
+.login-footer {
+  display: none;
+  position: fixed;
+  bottom: 22px;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-size: 12px;
+  color: #b0b3b8;
+}
+body.login-view .login-footer { display: block; }
+
+.login-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 14px;
+}
+
+.login-field label {
+  font-size: 13px;
+  font-weight: 500;
+  color: #374151;
+}
+
+.login-field input {
+  padding: 10px 12px;
+  background: #ffffff;
+  border: 1px solid #e3e3e3;
+  border-radius: 8px;
+  color: #1c1e21;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.15s, box-shadow 0.15s;
+  width: 100%;
+}
+
+.login-password-wrapper {
+  position: relative;
+}
+
+.login-password-wrapper input {
+  padding-right: 38px;
+  width: 100%;
+}
+
+.login-eye-btn {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: #9ca3af;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  line-height: 1;
+  transition: color 0.15s;
+}
+
+.login-eye-btn:hover { color: #6b7280; }
+
+.login-field input:focus { border-color: #1c1e21; box-shadow: 0 0 0 3px rgba(28, 30, 33, 0.08); }
+
+/* Anula el fondo amarillo/azul que Chrome aplica al autocompletar: no se puede
+   cambiar el background directamente, así que se tapa con un box-shadow inset y se
+   fuerza el color del texto/cursor. La transición larga evita el parpadeo de color. */
+.login-field input:-webkit-autofill,
+.login-field input:-webkit-autofill:hover,
+.login-field input:-webkit-autofill:active {
+  -webkit-text-fill-color: #1c1e21;
+  caret-color: #1c1e21;
+  -webkit-box-shadow: 0 0 0 1000px #ffffff inset;
+          box-shadow: 0 0 0 1000px #ffffff inset;
+  transition: background-color 9999s ease-in-out 0s;
+}
+
+/* Autocompletado + foco: mantiene el anillo de foco sobre el fondo blanco. */
+.login-field input:-webkit-autofill:focus {
+  -webkit-box-shadow: 0 0 0 1000px #ffffff inset, 0 0 0 3px rgba(28, 30, 33, 0.08);
+          box-shadow: 0 0 0 1000px #ffffff inset, 0 0 0 3px rgba(28, 30, 33, 0.08);
+}
+
+.login-btn {
+  width: 100%;
+  padding: 11px;
+  background: #1c1e21;
+  border: none;
+  border-radius: 8px;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s;
+  margin-top: 4px;
+}
+
+.login-btn:hover    { background: #000; }
+.login-btn:disabled { background: #e5e7eb; color: #9ca3af; cursor: not-allowed; }
+
+.login-switch {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.login-switch-btn {
+  background: none;
+  border: none;
+  color: #1763ff;
+  font-size: 13px;
+  cursor: pointer;
+  font-family: inherit;
+  padding: 0;
+}
+
+.login-switch-btn:hover { text-decoration: underline; }
+
+.login-error {
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  color: #dc2626;
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-size: 13px;
+  margin-bottom: 16px;
+  display: none;
+}
+
+.google-btn-wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+/* El botón de Google se renderiza en un iframe de la librería GSI (con esquinas
+   ~4px). Forzamos el mismo radio que el botón "Entrar" (8px) recortando el iframe. */
+.google-btn-wrapper iframe {
+  border-radius: 8px !important;
+  overflow: hidden;
+}
+
+/* ============================================================
+   Header de la app (logo TotalRenting + usuario/logout).
+   - Barra en flujo (relative) arriba del todo, a lo ancho de la ventana.
+   - Se adapta a light/dark siguiendo la clase .dark-mode que Scalar
+     aplica al cambiar de tema.
+   ============================================================ */
+/* Le indicamos a Scalar el alto de nuestro header (para que alinee sus elementos sticky
+   justo debajo). */
+:root {
+  --scalar-custom-header-height: 56px;
+}
+
+/* Scalar fija min-height:100dvh en sus contenedores de layout, así que header[56px] +
+   layout[100dvh] generaba un scroll de sobra de 56px. Les restamos la altura del header.
+   Usamos #scalar-app (id) para ganar especificidad a sus reglas sin depender del hash
+   interno [data-v-...] que cambia entre versiones. */
+#scalar-app .references-classic,
+#scalar-app .references-layout {
+  min-height: calc(100dvh - 56px);
+}
+
+.tr-header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  /* Mismo estilo que los headers de crm-totalrenting: fondo translúcido + blur */
+  background: rgba(255, 255, 255, 0.7);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(229, 231, 235, 0.6);
+  /* Oculto hasta alinearlo con el contenido de Scalar (evita el flash mal encuadrado) */
+  visibility: hidden;
+}
+
+.tr-header.is-ready {
+  visibility: visible;
+}
+
+/* Overlay de carga mientras Scalar monta */
+.tr-loading-overlay {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #ffffff;
+  z-index: 2000;
+}
+
+.dark-mode .tr-loading-overlay {
+  background: #0f0f0f;
+}
+
+.tr-spinner {
+  width: 36px;
+  height: 36px;
+  border: 3px solid rgba(0, 0, 0, 0.1);
+  border-top-color: #1c1e21;
+  border-radius: 50%;
+  animation: tr-spin 0.7s linear infinite;
+}
+
+.dark-mode .tr-spinner {
+  border-color: rgba(255, 255, 255, 0.15);
+  border-top-color: #ffffff;
+}
+
+@keyframes tr-spin {
+  to { transform: rotate(360deg); }
+}
+
+.dark-mode .tr-header {
+  background: rgba(15, 15, 15, 0.7);
+  border-bottom-color: rgba(42, 42, 42, 0.6);
+}
+
+.tr-header-logo {
+  display: flex;
+  align-items: center;
+}
+
+.tr-header-logo svg {
+  height: 32px;
+  width: auto;
+  display: block;
+}
+
+/* El logo es oscuro (#2e2e2f) con un acento rojo; en dark pasamos solo lo oscuro a
+   blanco para que se lea sobre el fondo negro, dejando el rojo intacto. */
+.dark-mode .tr-header-logo svg [fill="#2e2e2f"] {
+  fill: #ffffff;
+}
+
+.tr-user-widget {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+  cursor: pointer;
+  border-radius: 8px;
+  padding: 6px 8px;
+  transition: background 0.15s;
+  position: relative;
+}
+
+.tr-user-widget:hover {
+  background: #f4f4f5;
+}
+
+.dark-mode .tr-user-widget:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.tr-user-avatar {
+  width: 26px;
+  height: 26px;
+  min-width: 26px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #1c1e21, #3a3d42);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  font-weight: 700;
+  color: #fff;
+}
+
+.tr-user-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.tr-user-name {
+  font-size: 13px;
+  font-weight: 600;
+  color: #1c1e21;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.dark-mode .tr-user-name { color: #e8e8e8; }
+
+.tr-user-email {
+  font-size: 11px;
+  color: #6b7280;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.dark-mode .tr-user-email { color: #9ca3af; }
+
+.tr-menu-dropdown {
+  display: none;
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  background: #ffffff;
+  border: 1px solid #ededed;
+  border-radius: 8px;
+  overflow: hidden;
+  min-width: 140px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+}
+
+.dark-mode .tr-menu-dropdown {
+  background: #1a1a1a;
+  border-color: #2a2a2a;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+}
+
+.tr-menu-dropdown.open {
+  display: block;
+}
+
+.tr-logout-item {
+  width: 100%;
+  padding: 9px 14px;
+  background: none;
+  border: none;
+  color: #dc2626;
+  font-size: 13px;
+  cursor: pointer;
+  text-align: left;
+  font-family: inherit;
+  transition: background 0.1s;
+}
+
+.tr-logout-item:hover {
+  background: #fef2f2;
+}
+
+.dark-mode .tr-logout-item { color: #f87171; }
+.dark-mode .tr-logout-item:hover { background: #2a1515; }

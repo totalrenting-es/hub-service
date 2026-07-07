@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hub Service &mdash; Documentaci&#243;n</title>
+  <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+  <link rel="stylesheet" href="/docs/styles.css" />
+</head>
+<body class="login-view">
+
+  <!-- ===================== LOGIN ===================== -->
+  <div class="login-card" id="login-section">
+    <div class="login-logo">
+      <svg width="120" height="38" id="Capa_1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3563.1 863.8"><path id="Trazado_200" fill="#2e2e2f" d="M2995.6,597.2V0h153.2v466.4h414.3v130.8h-567.5Z"></path><path id="Trazado_201" fill="#2e2e2f" d="M1508.5,298.6c0,48.7-8.9,91.8-26.8,129.1s-43.5,68.5-76.8,93.6-73.7,44-121.2,56.8-100.8,19.2-160,19.2-112.7-6.4-160.5-19.2-88.5-31.7-122-56.8c-33.6-25.1-59.5-56.2-77.6-93.6-18.2-37.3-27.3-80.3-27.3-129.1s9.1-91.8,27.3-129.1,44.1-68.5,77.6-93.5c33.6-25.1,74.3-44,122-56.8,47.7-12.8,101.2-19.2,160.4-19.2s112.5,6.4,160,19.2c47.5,12.8,87.9,31.7,121.2,56.8,33.3,25.1,58.9,56.2,76.8,93.5s26.8,80.3,26.8,129.1M1353.7,298.6c0-21.5-3.5-42.9-10.1-63.4-6.8-21.1-18.7-40-35.9-56.8-17.2-16.8-40.7-30.4-70.4-40.9-29.7-10.5-67.6-15.7-113.6-15.7-30.8,0-58,2.4-81.4,7.2-23.4,4.8-43.7,11.5-60.7,20-17.1,8.5-31.4,18.5-43,30-11.6,11.4-20.8,23.7-27.7,36.7-6.8,12.9-11.8,26.6-14.7,40.9-2.9,13.8-4.3,27.8-4.4,41.9,0,14.3,1.5,28.5,4.4,42.5,2.9,14.3,7.8,28.2,14.7,41.1,6.9,13.1,16.1,25.3,27.7,36.5,11.6,11.3,25.9,21.1,43,29.5s37.3,15,60.7,19.8,50.5,7.2,81.4,7.2c46,0,83.8-5.2,113.6-15.7,29.7-10.5,53.2-24.1,70.4-40.9,17.2-16.8,29.2-35.7,35.9-56.8,6.7-20.5,10.1-41.9,10.1-63.4"></path><path id="Trazado_204" fill="#2e2e2f" d="M2866.8,484.2h-168.1l53.3,113h171l-56.2-113h0Z"></path><path id="Trazado_205" fill="#2e2e2f" d="M2455.1,0l-297,597.2h171l10.5-22.2,42.8-90.8h0l55-116.5h-.2l71.3-150.7,32.8-69.3,50.6,107.7,52.7,112.2h164.3L2626,0h-171,.1Z"></path><path id="Trazado_461" fill="#d60e2b" d="M1472.1,0l107.6,129.7h190.1v446.7h169.5l-.8-446.7h206L2251.5,0h-779.4Z"></path><path id="Trazado_461-2" fill="#2e2e2f" d="M0,0l107.6,129.7h190.1v446.7h169.5l-.8-446.7h206L779.4,0H0Z"></path><path id="Trazado_208" fill="#2e2e2f" d="M1097.6,859.8v-148h151.5v31.6h-110v24.4h104.3v31.6h-104.3v28.9h111.5v31.6h-153v-.1Z"></path><path id="Trazado_209" fill="#2e2e2f" d="M1569.2,859.8l-100.9-101.7v101.7h-40.4v-148h43.9l101.1,102.1v-102.1h40.2v148h-43.9Z"></path><path id="Trazado_210" fill="#2e2e2f" d="M1874.6,744v115.8h-40.4v-115.8h-63.5v-32.2h167.5v32.2h-63.6Z"></path><rect id="Rectángulo_72" fill="#2e2e2f" x="2107.4" y="711.8" width="40.4" height="148"></rect><path id="Trazado_211" fill="#2e2e2f" d="M2471.2,859.8l-100.9-101.7v101.7h-40.4v-148h43.9l101.1,102.1v-102.1h40.2v148h-43.9Z"></path><path id="Trazado_212" fill="#2e2e2f" d="M2796.5,708.1c13.7,0,27.4,1.2,40.9,3.7,11.8,2.3,23.4,5.5,34.7,9.5v36.2c-4.5-2.5-9.2-4.7-14-6.7-5.5-2.2-11.2-4.1-16.9-5.7-6.4-1.7-13-3.1-19.6-4-7.3-1-14.7-1.5-22-1.5-9.6,0-17.9.7-25,2-6.3,1.1-12.4,3-18.3,5.5-4.6,2-8.8,4.7-12.5,8-3.1,2.8-5.7,6.1-7.8,9.8-1.8,3.3-3.1,6.9-3.9,10.6-.7,3.4-1.1,6.9-1.1,10.4,0,3.2.3,6.4.9,9.6.7,3.6,1.8,7.1,3.5,10.4,1.9,3.6,4.3,7,7.1,9.9,3.5,3.5,7.5,6.3,11.9,8.4,4.9,2.5,10.8,4.4,17.7,5.9s15.1,2.2,24.6,2.2,9-.2,12.5-.4c3.5-.3,6.8-.7,9.7-1.2,2.8-.5,5.6-1.1,8.3-1.8,2.6-.8,5.3-1.5,8-2.3v-17.9h-45.3v-32.4h85.7v75.6c-5.9,1.9-11.9,3.6-18,4.9-6.6,1.5-13.5,2.8-20.6,3.8s-14.2,1.8-21.3,2.4c-7.1.6-13.8.8-20.1.8-9.4,0-18.9-.6-28.2-1.9-8.6-1.2-17-3.2-25.2-6-7.5-2.6-14.7-6-21.3-10.3-6.3-4-11.8-9-16.4-14.8-4.6-5.9-8.2-12.6-10.6-19.8-2.5-7.5-3.8-15.8-3.8-25s1.3-17.5,3.9-25c2.4-7.2,6.2-13.9,10.9-19.8,4.8-5.8,10.5-10.8,16.9-14.8,6.8-4.3,14.1-7.7,21.7-10.3,8.2-2.8,16.7-4.8,25.3-6,9.2-1.3,18.4-2,27.7-1.9"></path><path fill="#2e2e2f" d="M793.7,774.4v-31.7h50.8l32-29c-6.4-1.3-13.7-1.9-21.9-1.9h-101.3v113.4l56.1-50.8h-15.8.1Z"></path><path fill="#2e2e2f" d="M894,795.6c3.9-2.3,7.5-5.1,10.5-8.5,3.1-3.5,5.5-7.6,7.2-12,1.8-4.7,2.7-10.1,2.7-16.4,0-6.6-1-13.1-3.2-19.3-2.1-5.7-5.7-10.8-10.4-14.8-2.8-2.4-6.2-4.5-10-6.3l-28.3,25.6c2.1.5,4.1,1.3,5.9,2.4,1.8,1.2,3.2,2.9,4,4.9.8,2.4,1.2,4.8,1.2,7.3h0c0,2.5-.3,5-1.2,7.3-.8,2-2.2,3.7-4,4.9-2.3,1.4-4.9,2.4-7.6,2.8-3.9.6-7.9.9-11.8.9h-20.2l-34.1,30.9h43.2l45.3,54.5h47.3l-49-58.5c4.4-1.5,8.6-3.4,12.6-5.7h-.1Z"></path><polygon fill="#2e2e2f" points="753.3 859.8 793.7 859.8 793.7 806.1 753.3 842.7 753.3 859.8"></polygon><polygon fill="#2e2e2f" points="793.7 806.1 794.6 805.3 793.7 805.3 793.7 806.1"></polygon></svg>
+      <div class="login-logo-sub">Documentaci&#243;n</div>
+    </div>
+
+    <div class="login-lock" aria-hidden="true">
+      <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+    </div>
+
+    <h1>Iniciar sesi&#243;n</h1>
+    <p class="login-subtitle">Accede a la documentaci&#243;n con tu cuenta corporativa</p>
+
+    <div class="login-error" id="login-error"></div>
+
+    <!-- Email y contraseña (método principal) -->
+    <form id="email-form">
+      <div class="login-field">
+        <label for="login-email">Email</label>
+        <input type="email" id="login-email" placeholder="correo@empresa.com" autocomplete="email" required />
+      </div>
+      <div class="login-field">
+        <label for="login-password">Contrase&#241;a</label>
+        <div class="login-password-wrapper">
+          <input type="password" id="login-password" placeholder="&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;" autocomplete="current-password" required />
+          <button type="button" class="login-eye-btn" id="toggle-password" tabindex="-1">
+            <svg id="eye-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+            <svg id="eye-off-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/></svg>
+          </button>
+        </div>
+      </div>
+      <button type="submit" class="login-btn" id="login-btn">Entrar</button>
+    </form>
+
+    <div class="login-divider"><span>o contin&#250;a con</span></div>
+
+    <!-- Google (método secundario) -->
+    <div class="google-btn-wrapper">
+      <div id="g_id_onload"
+        data-client_id="{{googleClientId}}"
+        data-callback="onGoogleLogin"
+        data-auto_prompt="false">
+      </div>
+      <div class="g_id_signin"
+        data-type="standard"
+        data-size="large"
+        data-theme="outline"
+        data-text="continue_with"
+        data-shape="rectangular"
+        data-width="320"
+        data-logo_alignment="left">
+      </div>
+    </div>
+
+  </div>
+
+  <footer class="login-footer">&copy; 2026 Total Renting. Todos los derechos reservados.</footer>
+
+  <!-- ===================== APP ===================== -->
+  <div id="scalar-app" style="display:none"></div>
+
+  <script>
+    // Login con Google: el botón GSI devuelve un ID token (credential) que validamos
+    // en identity vía /api/admin/auth/google.
+    function onGoogleLogin(response) {
+      setError('');
+      fetch('/api/admin/auth/google', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ token: response.credential })
+      })
+        .then(function(r) { return r.json(); })
+        .then(function(data) {
+          if (data.error) throw new Error(data.error);
+          var token = data.tokens ? data.tokens.accessToken : data.accessToken;
+          if (!token) throw new Error('Credenciales inv\u00e1lidas');
+          loadApp(token);
+        })
+        .catch(function(err) { setError(err.message); });
+    }
+
+    // Inyecta la librería GSI bajo demanda (solo en la pantalla de login). GSI procesa
+    // el div #g_id_onload y renderiza el botón al cargar.
+    function initGoogleSignIn() {
+      if (document.getElementById('gsi-client')) return;
+      var s = document.createElement('script');
+      s.id = 'gsi-client';
+      s.src = 'https://accounts.google.com/gsi/client';
+      s.async = true;
+      s.defer = true;
+      document.head.appendChild(s);
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+      // Restaurar sesión si hay token guardado y no ha expirado
+      var savedToken = localStorage.getItem('docs_token');
+      if (savedToken) {
+        try {
+          var raw = atob(savedToken.split('.')[1].replace(/-/g, '+').replace(/_/g, '/'));
+          var payload = JSON.parse(decodeURIComponent(escape(raw)));
+          if (payload.exp && payload.exp * 1000 > Date.now()) {
+            loadApp(savedToken);
+            return;
+          }
+        } catch (_) {}
+        localStorage.removeItem('docs_token');
+      }
+
+      // Solo llegamos aquí si NO hay sesión válida: mostramos login y cargamos Google GSI.
+      // (Si ya hay sesión, hicimos return arriba y GSI no se inicializa, así no salta su
+      // chequeo de origen ni ensucia la consola estando ya logueado.)
+      initGoogleSignIn();
+
+      // Toggle ojo contraseña
+      document.getElementById('toggle-password').addEventListener('click', function() {
+        var input  = document.getElementById('login-password');
+        var eyeOn  = document.getElementById('eye-icon');
+        var eyeOff = document.getElementById('eye-off-icon');
+        var isPass = input.type === 'password';
+        input.type           = isPass ? 'text' : 'password';
+        eyeOn.style.display  = isPass ? 'none' : '';
+        eyeOff.style.display = isPass ? ''     : 'none';
+      });
+
+      // Login con email
+      document.getElementById('email-form').addEventListener('submit', function(e) {
+        e.preventDefault();
+        var btn   = document.getElementById('login-btn');
+        var email = document.getElementById('login-email').value;
+        var pass  = document.getElementById('login-password').value;
+
+        btn.disabled = true;
+        btn.textContent = 'Verificando...';
+        setError('');
+
+        fetch('/api/admin/auth/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email: email, password: pass })
+        })
+          .then(function(r) { return r.json(); })
+          .then(function(data) {
+            var token = data.tokens ? data.tokens.accessToken : data.accessToken;
+            if (!token) throw new Error(data.error || 'Credenciales inv\u00e1lidas');
+            loadApp(token);
+          })
+          .catch(function(err) {
+            setError(err.message);
+            btn.disabled = false;
+            btn.textContent = 'Entrar';
+          });
+      });
+    });
+
+    function setError(msg) {
+      var el = document.getElementById('login-error');
+      el.textContent = msg;
+      el.style.display = msg ? 'block' : 'none';
+    }
+
+    function loadApp(token) {
+      localStorage.setItem('docs_token', token);
+      var raw     = atob(token.split('.')[1].replace(/-/g, '+').replace(/_/g, '/'));
+      var payload = JSON.parse(decodeURIComponent(escape(raw)));
+      var name     = payload.name  || payload.email || 'Admin';
+      var email    = payload.email || '';
+      var initials = name.split(' ').slice(0, 2).map(function(w) { return w[0]; }).join('').toUpperCase();
+
+      document.getElementById('login-section').style.display = 'none';
+      document.body.classList.remove('login-view');
+      document.getElementById('scalar-app').style.display = 'block';
+      showLoadingOverlay();
+
+      // El endpoint del spec exige el token, así que lo descargamos nosotros con
+      // el token y se lo pasamos a Scalar ya resuelto (no puede mandar headers en spec.url).
+      fetch('/api/docs/spec', { headers: { 'Authorization': 'Bearer ' + token } })
+        .then(function(res) {
+          if (res.status === 401) throw new Error('unauthorized');
+          if (!res.ok) throw new Error('spec-error');
+          return res.json();
+        })
+        .then(function(spec) { renderScalar(spec); })
+        .catch(function(err) {
+          if (err && err.message === 'unauthorized') {
+            localStorage.removeItem('docs_token');
+            location.reload();
+          }
+        });
+
+      injectHeader(name, email, initials);
+    }
+
+    function renderScalar(spec) {
+      // Scalar arranca con un hash en la URL (#description/introduction) y, al montar,
+      // hace deep-link a esa sección arrastrando el scroll, lo que oculta el header.
+      // Limpiamos el hash y forzamos volver arriba durante el primer segundo de montaje.
+      if (location.hash) {
+        history.replaceState(null, '', location.pathname + location.search);
+      }
+      [0, 100, 300, 600, 1000].forEach(function(t) {
+        setTimeout(function() { window.scrollTo(0, 0); }, t);
+      });
+
+      // Versión fijada + SRI: si el bundle del CDN cambiase (compromiso de la cadena de
+      // suministro), el hash no cuadra y el navegador no lo ejecuta. Esta página guarda
+      // un JWT de admin en localStorage, así que el script de terceros debe ser inmutable.
+      var script = document.createElement('script');
+      script.src = 'https://cdn.jsdelivr.net/npm/@scalar/api-reference@1.60.0/dist/browser/standalone.min.js';
+      script.integrity = 'sha384-4BdmZQQTc462+ocGPo+GP3Hi/eQjMQTmNkSU9J5w3FD6hGUEmU2PqNRnbklONt4R';
+      script.crossOrigin = 'anonymous';
+      script.onload = function() {
+        Scalar.createApiReference('#scalar-app', {
+          content: spec,
+          layout: 'classic',
+          showDeveloperTools: 'never',
+          // Sin proxy de Scalar: las peticiones de prueba no transitan por api.scalar.com
+          // (evita fugas y silencia los errores de CSP a ese host).
+          proxyUrl: '',
+          defaultOpenAllTags: true,
+          hideDarkModeToggle: false,
+          theme: 'default',
+          darkMode: false,
+          hideClientButton: false,
+          showSidebar: true,
+          operationTitleSource: 'summary',
+          persistAuth: false,
+          isEditable: false,
+          hideModels: false,
+          documentDownloadType: 'none',
+          hideTestRequestButton: false,
+          hideSearch: false,
+          showOperationId: false,
+          withDefaultFonts: true,
+          expandAllModelSections: false,
+          expandAllResponses: false,
+          orderSchemaPropertiesBy: 'alpha',
+          orderRequiredPropertiesFirst: true
+        });
+      };
+      document.head.appendChild(script);
+    }
+
+    // Header sticky propio arriba del todo: logo de TotalRenting a la izquierda y
+    // widget de usuario (avatar + nombre/email + logout) a la derecha.
+    function injectHeader(name, email, initials) {
+      if (document.querySelector('.tr-header')) return;
+
+      var header = document.createElement('header');
+      header.className = 'tr-header';
+
+      // Logo: clonamos el SVG del login, que sigue en el DOM aunque est\u00e9 oculto.
+      var logoWrap = document.createElement('div');
+      logoWrap.className = 'tr-header-logo';
+      var loginSvg = document.querySelector('#login-section .login-logo svg');
+      if (loginSvg) logoWrap.appendChild(loginSvg.cloneNode(true));
+
+      // Construimos el widget con createElement + textContent (no innerHTML) para que
+      // name/email del JWT no puedan inyectar HTML/JS en la p\u00e1gina.
+      var widget = document.createElement('div');
+      widget.className = 'tr-user-widget';
+
+      var avatar = document.createElement('div');
+      avatar.className = 'tr-user-avatar';
+      avatar.textContent = initials;
+
+      var info = document.createElement('div');
+      info.className = 'tr-user-info';
+      var nameEl = document.createElement('span');
+      nameEl.className = 'tr-user-name';
+      nameEl.textContent = name;
+      var emailEl = document.createElement('span');
+      emailEl.className = 'tr-user-email';
+      emailEl.textContent = email;
+      info.appendChild(nameEl);
+      info.appendChild(emailEl);
+
+      var menu = document.createElement('div');
+      menu.className = 'tr-menu-dropdown';
+      var logoutBtn = document.createElement('button');
+      logoutBtn.className = 'tr-logout-item';
+      logoutBtn.textContent = 'Cerrar sesi\u00f3n';
+      menu.appendChild(logoutBtn);
+
+      widget.appendChild(avatar);
+      widget.appendChild(info);
+      widget.appendChild(menu);
+
+      header.appendChild(logoWrap);
+      header.appendChild(widget);
+      var app = document.getElementById('scalar-app');
+      document.body.insertBefore(header, app);
+
+      widget.addEventListener('click', function(e) {
+        e.stopPropagation();
+        menu.classList.toggle('open');
+      });
+      document.addEventListener('click', function() {
+        menu.classList.remove('open');
+      });
+      logoutBtn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        localStorage.removeItem('docs_token');
+        location.reload();
+      });
+
+      alignHeaderToContent(header);
+    }
+
+    // Overlay de carga: tapa el rato en que Scalar monta y el header aún no está
+    // alineado, para no mostrarlo mal encuadrado.
+    function showLoadingOverlay() {
+      if (document.querySelector('.tr-loading-overlay')) return;
+      var ov = document.createElement('div');
+      ov.className = 'tr-loading-overlay';
+      ov.innerHTML = '<div class="tr-spinner"></div>';
+      document.body.appendChild(ov);
+    }
+
+    function hideLoadingOverlay() {
+      var ov = document.querySelector('.tr-loading-overlay');
+      if (ov) ov.remove();
+    }
+
+    // Alinea el contenido del header (logo / usuario) con el bloque de contenido
+    // centrado de Scalar: el logo cuadra con el borde izquierdo del contenido y el
+    // widget con el derecho. Scalar centra con márgenes automáticos según el viewport,
+    // así que medimos la sección en runtime y reajustamos al redimensionar.
+    function alignHeaderToContent(header) {
+      function apply() {
+        var section = document.querySelector('#scalar-app section.section')
+                   || document.querySelector('#scalar-app section');
+        if (!section) return false;
+        var rect = section.getBoundingClientRect();
+        if (rect.width === 0) return false;
+        header.style.paddingLeft  = Math.max(0, rect.left) + 'px';
+        header.style.paddingRight = Math.max(0, window.innerWidth - rect.right) + 'px';
+        return true;
+      }
+
+      // Una vez alineado (o si Scalar tarda demasiado), revelamos el header y
+      // quitamos el overlay de carga.
+      function reveal() {
+        header.classList.add('is-ready');
+        hideLoadingOverlay();
+      }
+
+      // Scalar monta de forma asíncrona: reintenta hasta que exista la sección.
+      var tries = 0;
+      var timer = setInterval(function() {
+        if (apply()) { clearInterval(timer); reveal(); }
+        else if (++tries > 40) { clearInterval(timer); reveal(); }
+      }, 150);
+
+      window.addEventListener('resize', apply);
+    }
+  </script>
+</body>
+</html>
