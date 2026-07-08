@@ -34,7 +34,6 @@ export class Config {
   // Identity-service: valida el login del panel /docs y custodia los permisos.
   public identityServiceUrl: string;
   public identityInternalSecret: string;
-  public jwt: { secret: string };
   public google: { clientId: string };
 
   constructor() {
@@ -69,10 +68,9 @@ export class Config {
       leadWebhookPath: '/api/hubspot/webhooks/lead-perdido-avanti'
     };
 
-    // Identity-service + auth del panel de docs
-    this.identityServiceUrl = process.env.IDENTITY_SERVICE_URL || 'http://localhost:3001';
+    // Identity-service + auth del panel de docs (por defecto el nombre de contenedor,
+    this.identityServiceUrl = process.env.IDENTITY_SERVICE_URL || 'http://identity-service:3001';
     this.identityInternalSecret = process.env.INTERNAL_SECRET || '';
-    this.jwt = { secret: process.env.JWT_SECRET || '' };
     this.google = { clientId: process.env.GOOGLE_CLIENT_ID || '' };
   }
 
