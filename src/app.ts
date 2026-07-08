@@ -1,10 +1,12 @@
 import Fastify from 'fastify';
 import cors from '@fastify/cors';
 import swagger from '@fastify/swagger';
-import scalarPlugin from '@scalar/fastify-api-reference';
 import { alphabetRoutes } from './routes/alphabet';
 import { settingsRoutes } from './routes/settings';
 import { vixieesRoutes } from './routes/vixiees';
+import { hubspotRoutes } from './routes/hubspot';
+import { adminAuthRoutes } from './routes/auth';
+import { docsRoutes, docsHandler } from './routes/docs';
 
 export const buildApp = async () => {
   const fastify = Fastify({ logger: false });
@@ -30,6 +32,7 @@ export const buildApp = async () => {
       tags: [
         { name: 'Alphabet', description: 'Proxy a la API de Alphabet' },
         { name: 'Vixiees', description: 'Webhooks de Vixiees (fan-out a múltiples destinos)' },
+        { name: 'HubSpot', description: 'Webhooks de HubSpot reenviados a integrations-service' },
         { name: 'Settings', description: 'Configuración y utilidades globales' },
         { name: 'Health', description: 'Estado del servidor' }
       ],
@@ -47,31 +50,10 @@ export const buildApp = async () => {
     }
   });
 
-  // Scalar UI
-  await fastify.register(scalarPlugin, {
-    routePrefix: '/docs',
-    configuration: {
-      layout: 'classic',
-      defaultOpenAllTags: true,
-      hideDarkModeToggle: false,
-      theme: 'default',
-      hideClientButton: false,
-      showSidebar: true,
-      operationTitleSource: 'summary',
-      persistAuth: false,
-      isEditable: false,
-      hideModels: false,
-      documentDownloadType: 'both',
-      hideTestRequestButton: false,
-      hideSearch: false,
-      showOperationId: false,
-      withDefaultFonts: true,
-      expandAllModelSections: false,
-      expandAllResponses: false,
-      orderSchemaPropertiesBy: 'alpha',
-      orderRequiredPropertiesFirst: true
-    }
-  });
+  // Docs — panel de login (Google/identity) + spec protegido con permiso docs:hub
+  fastify.get('/docs', { schema: { hide: true } }, docsHandler);
+  fastify.get('/docs/', { schema: { hide: true } }, docsHandler);
+  await fastify.register(docsRoutes);
 
   // Health check
   fastify.get(
@@ -96,17 +78,16 @@ export const buildApp = async () => {
     }
   );
 
-  // Favicon
-  fastify.get('/favicon.ico', async (_request, reply) => {
-    return reply.status(204).send();
-  });
-
   const apiPrefix = process.env.API_PREFIX || '/api';
+
+  // Auth del panel de docs: login proxeado a identity-service (exige permiso docs:hub).
+  await fastify.register(adminAuthRoutes, { prefix: `${apiPrefix}/admin/auth` });
 
   // Rutas
   await fastify.register(alphabetRoutes, { prefix: `${apiPrefix}/alphabet` });
   await fastify.register(settingsRoutes, { prefix: `${apiPrefix}/settings` });
   await fastify.register(vixieesRoutes, { prefix: `${apiPrefix}/vixiees` });
+  await fastify.register(hubspotRoutes, { prefix: `${apiPrefix}/hubspot` });
 
   return fastify;
 };
