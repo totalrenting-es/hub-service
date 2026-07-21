@@ -2,7 +2,7 @@ import { FastifyInstance } from 'fastify';
 import { handleProxyRequest } from '../../../controllers/alphabet';
 
 const schema = {
-  tags: ['Alphabet'],
+  tags: ['Alphabet Proxy'],
   summary: 'Proxy a Alphabet API',
   description: '**`PROXY`**\n\nReenvía todas las peticiones a la API de Alphabet manteniendo headers de autorización.'
 };
@@ -36,5 +36,10 @@ export async function proxyAllRoute(fastify: FastifyInstance) {
     });
   });
 
-  fastify.all('/proxy/*', { schema }, handleProxyRequest);
+  fastify.route({
+    method: ['GET', 'POST', 'PUT'],
+    url: '/proxy/*',
+    schema,
+    handler: handleProxyRequest
+  });
 }

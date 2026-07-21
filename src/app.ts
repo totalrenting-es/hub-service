@@ -30,7 +30,8 @@ export const buildApp = async () => {
         version: '1.0.0'
       },
       tags: [
-        { name: 'Alphabet', description: 'Proxy a la API de Alphabet' },
+        { name: 'Alphabet', description: 'Endpoints concretos de la API de Alphabet (documentados)' },
+        { name: 'Alphabet Proxy', description: 'Comodín: reenvía cualquier ruta a Alphabet' },
         { name: 'Vixiees', description: 'Webhooks de Vixiees (fan-out a múltiples destinos)' },
         { name: 'HubSpot', description: 'Webhooks de HubSpot reenviados a integrations-service' },
         { name: 'Settings', description: 'Configuración y utilidades globales' },
